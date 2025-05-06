@@ -1,17 +1,51 @@
-research_task:
+planning_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Plan the causal inference workflow based on user input and goals.
+    Identify the necessary steps, agents, and data requirements.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A detailed plan outlining the causal inference pipeline, including agents and tasks.
+  agent: planner_agent
+
+data_preprocessing_task:
+  description: >
+    Preprocess the raw data to ensure it is ready for causal modeling.
+    Perform cleaning, normalization, and metadata generation.
+  expected_output: >
+    A cleaned and normalized dataset with metadata for causal modeling.
+  agent: data_agent
+
+structure_learning_task:
+  description: >
+    Discover the causal structure (DAG) from the provided data using structural learning algorithms.
+  expected_output: >
+    A causal DAG representing the relationships between variables.
+  agent: structure_discovery_agent
+
+scm_construction_task:
+  description: >
+    Build a Structural Causal Model (SCM) from the discovered DAG.
+    Define functional relationships and quantify uncertainty.
+  expected_output: >
+    A complete SCM with functional equations and uncertainty quantification.
+  agent: scm_builder_agent
+
+intervention_simulation_task:
+  description: >
+    Simulate the effects of interventions on the SCM to answer "what if" questions.
+  expected_output: >
+    A detailed report of intervention effects, including causal chains and effect sizes.
+  agent: intervention_agent
+
+counterfactual_analysis_task:
+  description: >
+    Perform counterfactual analysis to answer "what would have happened if X were different?"
+  expected_output: >
+    Counterfactual results with intuitive and quantitative explanations.
+  agent: counterfactual_agent
 
 reporting_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Compile all causal analysis results into a comprehensive report with visualizations.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A detailed report summarizing all steps, including DAGs, SCMs, and simulations.
+  agent: reporting_agent
