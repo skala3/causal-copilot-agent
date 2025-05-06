@@ -2,9 +2,9 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+import logging
+
+logger = logging.getLogger(__name__)
 
 @CrewBase
 class CausalCopilotAgent():
@@ -12,53 +12,124 @@ class CausalCopilotAgent():
 
     agents: List[BaseAgent]
     tasks: List[Task]
+    agents_config: dict
+    tasks_config: dict
 
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
-    
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
+    # Define agents
     @agent
-    def researcher(self) -> Agent:
-        return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
-        )
+    def planner_agent(self) -> Agent:
+        """Creates the planner agent."""
+        logger.info("Initializing planner agent.")
+        return Agent(config=self.agents_config['planner_agent'], verbose=True)
 
     @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
-        )
+    def data_agent(self) -> Agent:
+        """Creates the data preprocessing agent."""
+        logger.info("Initializing data agent.")
+        return Agent(config=self.agents_config['data_agent'], verbose=True)
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+    @agent
+    def structure_discovery_agent(self) -> Agent:
+        """Creates the structure discovery agent."""
+        logger.info("Initializing structure discovery agent.")
+        return Agent(config=self.agents_config['structure_discovery_agent'], verbose=True)
+
+    @agent
+    def scm_builder_agent(self) -> Agent:
+        """Creates the SCM builder agent."""
+        logger.info("Initializing SCM builder agent.")
+        return Agent(config=self.agents_config['scm_builder_agent'], verbose=True)
+
+    @agent
+    def model_validator_agent(self) -> Agent:
+        """Creates the SCM evaluation agent."""
+        logger.info("Initializing model validator agent.")
+        return Agent(config=self.agents_config['model_validator_agent'], verbose=True)
+
+    @agent
+    def model_memory_agent(self) -> Agent:
+        """Creates the causal model memory manager agent."""
+        logger.info("Initializing model memory agent.")
+        return Agent(config=self.agents_config['model_memory_agent'], verbose=True)
+
+    @agent
+    def intervention_agent(self) -> Agent:
+        """Creates the intervention simulation agent."""
+        logger.info("Initializing intervention agent.")
+        return Agent(config=self.agents_config['intervention_agent'], verbose=True)
+
+    @agent
+    def counterfactual_agent(self) -> Agent:
+        """Creates the counterfactual analysis agent."""
+        logger.info("Initializing counterfactual agent.")
+        return Agent(config=self.agents_config['counterfactual_agent'], verbose=True)
+
+    @agent
+    def simulation_agent(self) -> Agent:
+        """Creates the forward simulation agent."""
+        logger.info("Initializing simulation agent.")
+        return Agent(config=self.agents_config['simulation_agent'], verbose=True)
+
+    @agent
+    def reporting_agent(self) -> Agent:
+        """Creates the reporting agent."""
+        logger.info("Initializing reporting agent.")
+        return Agent(config=self.agents_config['reporting_agent'], verbose=True)
+
+    # Define tasks
     @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
-        )
+    def planning_task(self) -> Task:
+        """Defines the planning task."""
+        logger.info("Initializing planning task.")
+        return Task(config=self.tasks_config['planning_task'])
+
+    @task
+    def data_preprocessing_task(self) -> Task:
+        """Defines the data preprocessing task."""
+        logger.info("Initializing data preprocessing task.")
+        return Task(config=self.tasks_config['data_preprocessing_task'])
+
+    @task
+    def structure_learning_task(self) -> Task:
+        """Defines the structure learning task."""
+        logger.info("Initializing structure learning task.")
+        return Task(config=self.tasks_config['structure_learning_task'])
+
+    @task
+    def scm_construction_task(self) -> Task:
+        """Defines the SCM construction task."""
+        logger.info("Initializing SCM construction task.")
+        return Task(config=self.tasks_config['scm_construction_task'])
+
+    @task
+    def intervention_simulation_task(self) -> Task:
+        """Defines the intervention simulation task."""
+        logger.info("Initializing intervention simulation task.")
+        return Task(config=self.tasks_config['intervention_simulation_task'])
+
+    @task
+    def counterfactual_analysis_task(self) -> Task:
+        """Defines the counterfactual analysis task."""
+        logger.info("Initializing counterfactual analysis task.")
+        return Task(config=self.tasks_config['counterfactual_analysis_task'])
 
     @task
     def reporting_task(self) -> Task:
+        """Defines the reporting task."""
+        logger.info("Initializing reporting task.")
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            config=self.tasks_config['reporting_task'],
+            output_file=self.tasks_config['reporting_task'].get('output_file', 'report.md')
         )
 
+    # Define the crew
     @crew
     def crew(self) -> Crew:
-        """Creates the CausalCopilotAgent crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
-
+        """Creates the CausalCopilotAgent crew."""
+        logger.info("Creating the crew with agents and tasks.")
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,  # Automatically created by the @agent decorator
+            tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
