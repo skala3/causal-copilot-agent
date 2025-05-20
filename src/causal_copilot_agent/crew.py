@@ -22,7 +22,7 @@ class CausalCopilotAgent():
     def verification_agent(self) -> Agent:
         """Creates the verification agent."""
         logger.info("Initializing verification agent.")
-        return Agent(config=self.agents_config['verification_agent'], verbose=True, tools=[EXASearchTool(api_key='dad981de-c586-4bd8-a795-e6b33eaae12f', num_results=10, type='auto')])
+        return Agent(config=self.agents_config['verification_agent'], verbose=True, tools=[EXASearchTool(num_results=10, type='auto')])
 
     # Define tasks
     @task
