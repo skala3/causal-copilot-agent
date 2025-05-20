@@ -1,7 +1,11 @@
 verification_task:
   description: >
-    Verify the correctness of causal inference tasks and results.
-    Ensure that all components are logically sound and consistent with causal principles.
+    The results of our causal inference task are given here:
+    {causal_results}
+    Break down the results into bullet points and verify, or refute, each one with sources.
+    Ensure that all conclusions are logically sound and consistent with information given in the literature.
+    If there is evidence contrary to the conclusions, please provide a detailed explanation, with sources
   expected_output: >
-    A verification report detailing the integrity of data, DAGs, SCMs, and results.
+    A verification report detailing the validity of data, DAGs, SCMs, and results, along with links to any 
+    sources or references used. Formatted as markdown with bullet points.
   agent: verification_agent

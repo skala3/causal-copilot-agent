@@ -4,6 +4,7 @@ from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 import logging
 from crewai_tools import SerperDevTool
+from crewai_tools import EXASearchTool
 
 logger = logging.getLogger(__name__)
 
@@ -21,14 +22,14 @@ class CausalCopilotAgent():
     def verification_agent(self) -> Agent:
         """Creates the verification agent."""
         logger.info("Initializing verification agent.")
-        return Agent(config=self.agents_config['verification_agent'], verbose=True, tools=[SerperDevTool])
+        return Agent(config=self.agents_config['verification_agent'], verbose=True, tools=[EXASearchTool(api_key='dad981de-c586-4bd8-a795-e6b33eaae12f', num_results=10, type='auto')])
 
     # Define tasks
     @task
     def verification_task(self) -> Task:
         """Defines the verification task."""
         logger.info("Initializing verification task.")
-        return Task(config=self.tasks_config['verification_task'])
+        return Task(config=self.tasks_config['verification_task'], output_file="verification_report.md")
 
     # Define the crew
     @crew

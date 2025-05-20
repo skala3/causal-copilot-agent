@@ -60,7 +60,9 @@ def main():
     args = parser.parse_args()
 
     # Prepare inputs
-    inputs = {}
+    inputs = {
+        'causal_results': 'The analysis of the causal relationships among the given variables indicates a structured interplay between the signaling pathways. Specifically, P38 and Jnk are identified as direct causal influences on PKC, suggesting that these kinases regulate PKC’s activity, likely playing a role in crucial cellular processes like differentiation and stress response. On the other hand, the undirected relationships among Raf, Mek, Plcg, PIP2, and PIP3 suggest a more complex interaction without clear cause-and-effect, highlighting a network of signaling components that may function collaboratively. For instance, Raf and Mek are known to be part of the MAPK pathway, where Raf activates Mek, thus indicating a pivotal role in cell proliferation and survival. Similarly, Plcg acts on PIP3, influencing downstream signaling involving PIP2, which might be integral for the activation of pathways like Akt that lead to cellular growth. Furthermore, Erk interacts with PKA and Akt, both of which are crucial for various cellular functions including metabolism and cell cycle regulation. Therefore, while P38 and Jnk are clearly defined in their causal roles with PKC, the undirected relationships illustrate a nuanced signaling landscape where feedback and network cooperation are significant. P38 and Jnk cause PKC, indicating their roles in modulating cellular responses. Raf and Mek have a collaborative relationship, functioning within the MAPK pathway for cellular proliferation. Plcg interacts with PIP3, which is crucial for downstream signaling, potentially affecting PIP2 levels. Erks interaction with PKA and Akt demonstrates the intersection of multiple signaling pathways crucial for cell function and metabolism. The overall structure reflects a balance of directed and undirected relationships crucial for proper cellular signaling dynamics.'
+        }
 
     # Perform the requested action
     if args.action == "run":

@@ -1,4 +1,4 @@
 User name is John Doe.
-User is an AI Engineer.
-User is interested in AI Agents.
-User is based in San Francisco, California.
+User is a Causal Inference Researcher.
+User is interested in Causal Discovery on a wide range of datasets.
+User is based in San Diego, California.
