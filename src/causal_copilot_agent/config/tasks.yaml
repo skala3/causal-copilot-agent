@@ -1,51 +1,11 @@
-planning_task:
+verification_task:
   description: >
-    Plan the causal inference workflow based on user input and goals.
-    Identify the necessary steps, agents, and data requirements.
+    The results of our causal inference task are given here:
+    {causal_results}
+    Break down the results into bullet points and verify, or refute, each one with sources.
+    Ensure that all conclusions are logically sound and consistent with information given in the literature.
+    If there is evidence contrary to the conclusions, please provide a detailed explanation, with sources
   expected_output: >
-    A detailed plan outlining the causal inference pipeline, including agents and tasks.
-  agent: planner_agent
-
-data_preprocessing_task:
-  description: >
-    Preprocess the raw data to ensure it is ready for causal modeling.
-    Perform cleaning, normalization, and metadata generation.
-  expected_output: >
-    A cleaned and normalized dataset with metadata for causal modeling.
-  agent: data_agent
-
-structure_learning_task:
-  description: >
-    Discover the causal structure (DAG) from the provided data using structural learning algorithms.
-  expected_output: >
-    A causal DAG representing the relationships between variables.
-  agent: structure_discovery_agent
-
-scm_construction_task:
-  description: >
-    Build a Structural Causal Model (SCM) from the discovered DAG.
-    Define functional relationships and quantify uncertainty.
-  expected_output: >
-    A complete SCM with functional equations and uncertainty quantification.
-  agent: scm_builder_agent
-
-intervention_simulation_task:
-  description: >
-    Simulate the effects of interventions on the SCM to answer "what if" questions.
-  expected_output: >
-    A detailed report of intervention effects, including causal chains and effect sizes.
-  agent: intervention_agent
-
-counterfactual_analysis_task:
-  description: >
-    Perform counterfactual analysis to answer "what would have happened if X were different?"
-  expected_output: >
-    Counterfactual results with intuitive and quantitative explanations.
-  agent: counterfactual_agent
-
-reporting_task:
-  description: >
-    Compile all causal analysis results into a comprehensive report with visualizations.
-  expected_output: >
-    A detailed report summarizing all steps, including DAGs, SCMs, and simulations.
-  agent: reporting_agent
+    A verification report detailing the validity of data, DAGs, SCMs, and results, along with links to any 
+    sources or references used. Formatted as markdown with bullet points.
+  agent: verification_agent
